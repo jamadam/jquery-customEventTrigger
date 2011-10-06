@@ -68,7 +68,9 @@
      */
     $[plugname].fn.remove = function(eventName){
         $(this).each(function() {
-            clearInterval($(this).data(generateTidDataName(eventName)));
+            var tidName = generateTidDataName(eventName);
+            clearInterval($(this).data(tidName));
+            $(this).removeData(tidName);
         });
     };
     

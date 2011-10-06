@@ -10,27 +10,28 @@
 	<script type="text/javascript">
 	$(function() {
 		$.customEventListener("#hoge").add('myClick', function(obj) {
-			var a = obj.filter('*:active');
-			return (a.length > 0);
-		});
-		$('#trigger').bind('click', function(){
-			$('#hoge').trigger('myClick');
+			return (obj.filter('*:active').length > 0);
 		});
 		$('#hoge').bind('myClick', function(){
-			console.log('myClick fire');
+			console.log('myClick fired');
 		});
 		$("#addDom").bind('click', function() {
-			$('#additionalContainer').append('<div class="additionalDiv">additionalDiv</div>');
+			var additionalDiv = $('<div class="additionalDiv">additionalDiv</div>').css({display:'none'});
+			$('#additionalContainer').append(additionalDiv);
+			additionalDiv.fadeIn();
 			return false;
 		});
 		$.customEventListener("#additionalContainer").add('gotElement', function(obj) {
-			return obj.find('*').length > 0;
+			var a = obj.find('*');
+			if (a.length > 0) {
+				return (a.css('opacity') == 1);
+			}
 		});
 		$("#additionalContainer").bind('gotElement', function() {
 			console.log('gotElement');
 		});
 		$.customEventListener(document).add('additionalContainerLoaded', function(obj) {
-			return obj.find('#additionalContainer').length > 0;
+			return $('#additionalContainer').length > 0;
 		});
 		$(document).bind('additionalContainerLoaded', function() {
 			console.log('additionalContainerLoaded');
@@ -45,10 +46,7 @@
 	<h2 id="qunit-userAgent"></h2>
 	<ol id="qunit-tests"></ol>
 	<div id="hoge">
-		test
-	</div>
-	<div id="trigger">
-		trigger
+		myClick
 	</div>
 	<a id="addDom" href="#add">
 		Add Dom
