@@ -36,6 +36,16 @@
 		$(document).bind('additionalContainerLoaded', function() {
 			console.log('additionalContainerLoaded');
 		});
+		
+		$.customEventListener("#textarea").addChangeListener('resize', function(obj){
+			return obj.get(0).clientWidth + 'x' + obj.get(0).clientHeight;
+		});
+		$("#hoge").bind('click', function(){
+			$("#textarea").css('width', '1000px');
+		});
+		$("#textarea").bind('resize', function() {
+			console.log('resize');
+		});
 	});
 	</script>
 </head>
@@ -54,5 +64,10 @@
 	<div id="additionalContainer">
 		additionalContainer
 	</div>
+	<form>
+		<div>
+			<textarea id="textarea">test</textarea>
+		</div>
+	</form>
 </body>
 </html>

@@ -3,12 +3,13 @@
  * 
  * SYNOPSIS
  *
- * $.customEventListener('#target').add(yourEventName, condition)
+ * $.customEventListener('#target').addGetTrueListener(yourEventName, condition)
+ * $.customEventListener('#target').addChangeListener(yourEventName, condition)
  * $.customEventListener('#target').remove(yourEventName)
  *
  * EXAMPLE1
  * 
- * $.customEventListener('#target').add('myEvent', myCondition(obj) {
+ * $.customEventListener('#target').addGetTrueListener('myEvent', myCondition(obj) {
  *     if (condition) {
  *         return true;
  *     }
@@ -17,8 +18,14 @@
  * 
  * EXAMPLE2
  * 
- * $.customEventListener('.tab-content').add('shown', function(obj) {
+ * $.customEventListener('.tab-content').addGetTrueListener('shown', function(obj) {
  *     return (obj.css('display') != 'none');
+ * });
+ * 
+ * EXAMPLE3
+ * 
+ * $.customEventListener('.tab-content').addChangeListener('resize', function(obj) {
+ *     return obj.get(0).clientWidth + 'x' + obj.get(0).clientHeight;
  * });
  * 
  * http://blog2.jamadam.com/
@@ -46,15 +53,38 @@
     }
     
     /**
-     * add listener
+     * add Conditional listener
      */
-    $[plugname].fn.add = function(eventName, condition, interval){
+    $[plugname].fn.addGetTrueListener = function(eventName, condition, interval){
         $(this).each(function() {
             var obj = $(this);
             var lastRes = false;
             var tid = setInterval(function() {
                 var res = condition(obj);
                 if (! lastRes && res) {
+                    obj.trigger(eventName);
+                }
+                lastRes = res;
+            }, interval || 1);
+            obj.data(generateTidDataName(eventName), tid);
+        });
+    };
+    
+    /**
+     * add Conditional listener
+     */
+    $[plugname].fn.add = $[plugname].fn.addGetTrueListener;
+    
+    /**
+     * add change detect listener
+     */
+    $[plugname].fn.addChangeListener = function(eventName, condition, interval){
+        $(this).each(function() {
+            var obj = $(this);
+            var lastRes = undefined;
+            var tid = setInterval(function() {
+                var res = condition(obj);
+                if (lastRes !== res) {
                     obj.trigger(eventName);
                 }
                 lastRes = res;
