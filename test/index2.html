@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>jquery.customEventListener Test Suite</title>
+	<link rel="Stylesheet" media="screen" href="qunit/qunit/qunit.css" />
+	<script src="data/testinit.js"></script>
+	<script src="./jquery.1.6.4.js"></script>
+	<script src="../jquery.customEventListener.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$.customEventListener("#hoge").add('myClick', function(obj) {
+			var a = obj.filter('*:active');
+			return (a.length > 0);
+		});
+		$('#trigger').bind('click', function(){
+			$('#hoge').trigger('myClick');
+		});
+		$('#hoge').bind('myClick', function(){
+			console.log('myClick fire');
+		});
+		$("#addDom").bind('click', function() {
+			$('#additionalContainer').append('<div class="additionalDiv">additionalDiv</div>');
+			return false;
+		});
+		$.customEventListener("#additionalContainer").add('gotElement', function(obj) {
+			return obj.find('*').length > 0;
+		});
+		$("#additionalContainer").bind('gotElement', function() {
+			console.log('gotElement');
+		});
+		$.customEventListener(document).add('additionalContainerLoaded', function(obj) {
+			return obj.find('#additionalContainer').length > 0;
+		});
+		$(document).bind('additionalContainerLoaded', function() {
+			console.log('additionalContainerLoaded');
+		});
+	});
+	</script>
+</head>
+<body id="body">
+	<h1 id="qunit-header">jquery.customEventListener Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="hoge">
+		test
+	</div>
+	<div id="trigger">
+		trigger
+	</div>
+	<a id="addDom" href="#add">
+		Add Dom
+	</a>
+	<div id="additionalContainer">
+		additionalContainer
+	</div>
+</body>
+</html>
