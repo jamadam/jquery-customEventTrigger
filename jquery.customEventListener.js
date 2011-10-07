@@ -3,30 +3,35 @@
  * 
  * SYNOPSIS
  *
- * $.customEventListener('#target').addGetTrueListener(yourEventName, condition)
- * $.customEventListener('#target').addChangeListener(yourEventName, condition)
+ * $.customEventListener('#target').addGetTrueListener(yourEventName, condition, interval)
+ * $.customEventListener('#target').addChangeListener(yourEventName, condition, interval)
+ * $.customEventListener('#target').add(yourEventName, genCb, compareCb, interval)
  * $.customEventListener('#target').remove(yourEventName)
  *
  * EXAMPLE1
- * 
- * $.customEventListener('#target').addGetTrueListener('myEvent', myCondition(obj) {
- *     if (condition) {
- *         return true;
- *     }
- *     return false;
- * });
- * 
- * EXAMPLE2
  * 
  * $.customEventListener('.tab-content').addGetTrueListener('shown', function(obj) {
  *     return (obj.css('display') != 'none');
  * });
  * 
+ * EXAMPLE2
+ * 
+ * $.customEventListener("#textarea").addChangeListener('resizeX', function(obj){
+ *     return obj.get(0).clientWidth;
+ * });
+ * 
  * EXAMPLE3
  * 
- * $.customEventListener('.tab-content').addChangeListener('resize', function(obj) {
- *     return obj.get(0).clientWidth + 'x' + obj.get(0).clientHeight;
- * });
+ * $.customEventListener("#textarea").add('resize',
+ *     function(obj){
+ *         return [obj.get(0).clientWidth, obj.get(0).clientHeight];
+ *     },
+ *     function(a, b){
+ *         if (a !== undefined) {
+ *             return a[0] !== b[0] || a[1] !== b[1];
+ *         }
+ *     }
+ * );
  * 
  * http://blog2.jamadam.com/
  *
@@ -55,39 +60,32 @@
     /**
      * add Conditional listener
      */
-    $[plugname].fn.addGetTrueListener = function(eventName, condition, interval){
-        $(this).each(function() {
-            var obj = $(this);
-            var lastRes = false;
-            var tid = setInterval(function() {
-                var res = condition(obj);
-                if (! lastRes && res) {
-                    obj.trigger(eventName);
-                }
-                lastRes = res;
-            }, interval || 1);
-            obj.data(generateTidDataName(eventName), tid);
-        });
+    $[plugname].fn.addGetTrueListener = function(eventName, newValue, interval){
+        $[plugname](this).add(
+                eventName, newValue, function(a, b){return ! a && b}, interval);
     };
-    
-    /**
-     * add Conditional listener
-     */
-    $[plugname].fn.add = $[plugname].fn.addGetTrueListener;
     
     /**
      * add change detect listener
      */
-    $[plugname].fn.addChangeListener = function(eventName, condition, interval){
+    $[plugname].fn.addChangeListener = function(eventName, newValue, interval){
+        $[plugname](this).add(
+                eventName, newValue, function(a, b){return a !== b}, interval);
+    };
+    
+    /**
+     * add change detect listener
+     */
+    $[plugname].fn.add = function(eventName, newValue, compare, interval){
         $(this).each(function() {
             var obj = $(this);
-            var lastRes = undefined;
+            var a;
             var tid = setInterval(function() {
-                var res = condition(obj);
-                if (lastRes !== res) {
+                var b = newValue(obj);
+                if (compare(a, b)) {
                     obj.trigger(eventName);
                 }
-                lastRes = res;
+                a = b;
             }, interval || 1);
             obj.data(generateTidDataName(eventName), tid);
         });

@@ -9,7 +9,7 @@
 	<script src="../jquery.customEventListener.js"></script>
 	<script type="text/javascript">
 	$(function() {
-		$.customEventListener("#hoge").add('myClick', function(obj) {
+		$.customEventListener("#hoge").addGetTrueListener('myClick', function(obj) {
 			return (obj.filter('*:active').length > 0);
 		});
 		$('#hoge').bind('myClick', function(){
@@ -21,7 +21,7 @@
 			additionalDiv.fadeIn();
 			return false;
 		});
-		$.customEventListener("#additionalContainer").add('gotElement', function(obj) {
+		$.customEventListener("#additionalContainer").addGetTrueListener('gotElement', function(obj) {
 			var a = obj.find('*');
 			if (a.length > 0) {
 				return (a.css('opacity') == 1);
@@ -30,18 +30,37 @@
 		$("#additionalContainer").bind('gotElement', function() {
 			console.log('gotElement');
 		});
-		$.customEventListener(document).add('additionalContainerLoaded', function(obj) {
+		$.customEventListener(document).addGetTrueListener('additionalContainerLoaded', function(obj) {
 			return $('#additionalContainer').length > 0;
 		});
 		$(document).bind('additionalContainerLoaded', function() {
 			console.log('additionalContainerLoaded');
 		});
 		
-		$.customEventListener("#textarea").addChangeListener('resize', function(obj){
-			return obj.get(0).clientWidth + 'x' + obj.get(0).clientHeight;
+		$.customEventListener("#textarea").addChangeListener('resizeX', function(obj){
+			return obj.get(0).clientWidth;
 		});
+		$.customEventListener("#textarea").addChangeListener('resizeY', function(obj){
+			return obj.get(0).clientHeight;
+		});
+		$.customEventListener("#textarea").add('resize',
+			function(obj){
+				return [obj.get(0).clientWidth, obj.get(0).clientHeight];
+			},
+			function(a, b){
+				if (a !== undefined) {
+					return a[0] !== b[0] || a[1] !== b[1];
+				}
+			}
+		);
 		$("#hoge").bind('click', function(){
 			$("#textarea").css('width', '1000px');
+		});
+		$("#textarea").bind('resizeX', function() {
+			console.log('resizeX');
+		});
+		$("#textarea").bind('resizeY', function() {
+			console.log('resizeY');
 		});
 		$("#textarea").bind('resize', function() {
 			console.log('resize');

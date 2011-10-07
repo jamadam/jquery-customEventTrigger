@@ -25,7 +25,7 @@ $(function(){
 	
 	asyncTest('first trigger', 1, function(){
 		
-		$.customEventListener(target).add('myEvent', function(obj){
+		$.customEventListener(target).addGetTrueListener('myEvent', function(obj){
 			return obj.hasClass('someclass');
 		});
 		
