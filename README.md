@@ -1,4 +1,5 @@
-# conditionalTrigger 0.01 - Trigger events conditionally
+conditionalTrigger 0.01 - Trigger events conditionally
+---------------
 
 ## SYNOPSIS
     
@@ -8,19 +9,19 @@
     $.conditionalTrigger('#target').remove(yourEventName)
 
 ### EXAMPLE1
-    
+
     $.conditionalTrigger('.tab-content').addGetTrueTrigger('shown', function(obj) {
         return (obj.css('display') != 'none');
     });
 
 ### EXAMPLE2
-    
+
     $.conditionalTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
         return obj.get(0).clientWidth;
     });
 
 ### EXAMPLE3
-    
+
     $.conditionalTrigger("#textarea").add('resize',
         function(obj){
             return [obj.get(0).clientWidth, obj.get(0).clientHeight];
@@ -32,10 +33,12 @@
         }
     );
 
-http://blog2.jamadam.com/
-
-Copyright (c) 2011 jamadam
+Copyright (c) 2011 [jamadam]
+[jamadam]: http://blog2.jamadam.com/
 
 Dual licensed under the MIT and GPL licenses:
-  http://www.opensource.org/licenses/mit-license.php
-  http://www.gnu.org/licenses/gpl.html
+
+- [http://www.opensource.org/licenses/mit-license.php]
+- [http://www.gnu.org/licenses/gpl.html]
+[http://www.opensource.org/licenses/mit-license.php]: http://www.opensource.org/licenses/mit-license.php
+[http://www.gnu.org/licenses/gpl.html]:http://www.gnu.org/licenses/gpl.html
