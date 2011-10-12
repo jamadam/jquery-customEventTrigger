@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>jquery.customEventListener Test Suite</title>
+	<title>jquery.conditionalTrigger Test Suite</title>
 	<link rel="Stylesheet" media="screen" href="qunit/qunit/qunit.css" />
 	<script src="data/testinit.js"></script>
 	<script src="./jquery.1.6.4.js"></script>
-	<script src="../jquery.customEventListener.js"></script>
+	<script src="../jquery.conditionalTrigger.js"></script>
 	<script type="text/javascript">
 	$(function() {
-		$.customEventListener("#hoge").addGetTrueListener('myClick', function(obj) {
+		$.conditionalTrigger("#hoge").addGetTrueTrigger('myClick', function(obj) {
 			return (obj.filter('*:active').length > 0);
 		});
 		$('#hoge').bind('myClick', function(){
@@ -21,7 +21,7 @@
 			additionalDiv.fadeIn();
 			return false;
 		});
-		$.customEventListener("#additionalContainer").addGetTrueListener('gotElement', function(obj) {
+		$.conditionalTrigger("#additionalContainer").addGetTrueTrigger('gotElement', function(obj) {
 			var a = obj.find('*');
 			if (a.length > 0) {
 				return (a.css('opacity') == 1);
@@ -30,20 +30,20 @@
 		$("#additionalContainer").bind('gotElement', function() {
 			console.log('gotElement');
 		});
-		$.customEventListener(document).addGetTrueListener('additionalContainerLoaded', function(obj) {
+		$.conditionalTrigger(document).addGetTrueTrigger('additionalContainerLoaded', function(obj) {
 			return $('#additionalContainer').length > 0;
 		});
 		$(document).bind('additionalContainerLoaded', function() {
 			console.log('additionalContainerLoaded');
 		});
 		
-		$.customEventListener("#textarea").addChangeListener('resizeX', function(obj){
+		$.conditionalTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventListener("#textarea").addChangeListener('resizeY', function(obj){
+		$.conditionalTrigger("#textarea").addChangeTrigger('resizeY', function(obj){
 			return obj.get(0).clientHeight;
 		});
-		$.customEventListener("#textarea").add('resize',
+		$.conditionalTrigger("#textarea").add('resize',
 			function(obj){
 				return [obj.get(0).clientWidth, obj.get(0).clientHeight];
 			},
@@ -69,7 +69,7 @@
 	</script>
 </head>
 <body id="body">
-	<h1 id="qunit-header">jquery.customEventListener Test Suite</h1>
+	<h1 id="qunit-header">jquery.conditionalTrigger Test Suite</h1>
 	<h2 id="qunit-banner"></h2>
 	<div id="qunit-testrunner-toolbar"></div>
 	<h2 id="qunit-userAgent"></h2>

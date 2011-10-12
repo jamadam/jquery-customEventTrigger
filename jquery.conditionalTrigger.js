@@ -1,28 +1,28 @@
 /*!
- * customEventListener 0.01 - Add custom event listener
+ * conditionalTrigger 0.01 - Trigger events conditionally
  * 
  * SYNOPSIS
  *
- * $.customEventListener('#target').addGetTrueListener(yourEventName, condition, interval)
- * $.customEventListener('#target').addChangeListener(yourEventName, condition, interval)
- * $.customEventListener('#target').add(yourEventName, genCb, compareCb, interval)
- * $.customEventListener('#target').remove(yourEventName)
+ * $.conditionalTrigger('#target').addGetTrueTrigger(yourEventName, condition, interval)
+ * $.conditionalTrigger('#target').addChangeTrigger(yourEventName, condition, interval)
+ * $.conditionalTrigger('#target').add(yourEventName, genCb, compareCb, interval)
+ * $.conditionalTrigger('#target').remove(yourEventName)
  *
  * EXAMPLE1
  * 
- * $.customEventListener('.tab-content').addGetTrueListener('shown', function(obj) {
+ * $.conditionalTrigger('.tab-content').addGetTrueTrigger('shown', function(obj) {
  *     return (obj.css('display') != 'none');
  * });
  * 
  * EXAMPLE2
  * 
- * $.customEventListener("#textarea").addChangeListener('resizeX', function(obj){
+ * $.conditionalTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
  *     return obj.get(0).clientWidth;
  * });
  * 
  * EXAMPLE3
  * 
- * $.customEventListener("#textarea").add('resize',
+ * $.conditionalTrigger("#textarea").add('resize',
  *     function(obj){
  *         return [obj.get(0).clientWidth, obj.get(0).clientHeight];
  *     },
@@ -46,7 +46,7 @@
     /**
      * plugin name
      */
-    var plugname = 'customEventListener';
+    var plugname = 'conditionalTrigger';
     
     $[plugname] = $.sub();
     
@@ -58,23 +58,23 @@
     }
     
     /**
-     * add Conditional listener
+     * add Conditional Trigger
      */
-    $[plugname].fn.addGetTrueListener = function(eventName, newValue, interval){
+    $[plugname].fn.addGetTrueTrigger = function(eventName, newValue, interval){
         $[plugname](this).add(
                 eventName, newValue, function(a, b){return ! a && b}, interval);
     };
     
     /**
-     * add change detect listener
+     * add change detect Trigger
      */
-    $[plugname].fn.addChangeListener = function(eventName, newValue, interval){
+    $[plugname].fn.addChangeTrigger = function(eventName, newValue, interval){
         $[plugname](this).add(
                 eventName, newValue, function(a, b){return a !== b}, interval);
     };
     
     /**
-     * add change detect listener
+     * add change detect Trigger
      */
     $[plugname].fn.add = function(eventName, newValue, compare, interval){
         $(this).each(function() {
@@ -92,7 +92,7 @@
     };
     
     /**
-     * remove listener
+     * remove Trigger
      */
     $[plugname].fn.remove = function(eventName){
         $(this).each(function() {
