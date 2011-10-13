@@ -28,7 +28,7 @@
     /**
      * add Conditional Trigger
      */
-    $[plugname].fn.addGetTrueTrigger = function(eventName, newValue, interval){
+    $[plugname].fn.addGettingTrueEvent = function(eventName, newValue, interval){
         $[plugname](this).add(
                 eventName, newValue, function(a, b){return ! a && b}, interval);
     };
@@ -36,7 +36,7 @@
     /**
      * add change detect Trigger
      */
-    $[plugname].fn.addChangeTrigger = function(eventName, newValue, interval){
+    $[plugname].fn.addChangeEvent = function(eventName, newValue, interval){
         $[plugname](this).add(
                 eventName, newValue, function(a, b){return a !== b}, interval);
     };

@@ -9,7 +9,7 @@
 	<script src="../jquery.customEventTrigger.js"></script>
 	<script type="text/javascript">
 	$(function() {
-		$.customEventTrigger("#hoge").addGetTrueTrigger('myClick', function(obj) {
+		$.customEventTrigger("#hoge").addGettingTrueEvent('myClick', function(obj) {
 			return (obj.filter('*:active').length > 0);
 		});
 		$('#hoge').bind('myClick', function(){
@@ -21,7 +21,7 @@
 			additionalDiv.fadeIn();
 			return false;
 		});
-		$.customEventTrigger("#additionalContainer").addGetTrueTrigger('gotElement', function(obj) {
+		$.customEventTrigger("#additionalContainer").addGettingTrueEvent('gotElement', function(obj) {
 			var a = obj.find('*');
 			if (a.length > 0) {
 				return (a.css('opacity') == 1);
@@ -30,59 +30,59 @@
 		$("#additionalContainer").bind('gotElement', function() {
 			console.log('gotElement');
 		});
-		$.customEventTrigger(document).addGetTrueTrigger('additionalContainerLoaded', function(obj) {
+		$.customEventTrigger(document).addGettingTrueEvent('additionalContainerLoaded', function(obj) {
 			return $('#additionalContainer').length > 0;
 		});
 		$(document).bind('additionalContainerLoaded', function() {
 			console.log('additionalContainerLoaded');
 		});
 		
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeTrigger('resizeY', function(obj){
+		$.customEventTrigger("#textarea").addChangeEvent('resizeY', function(obj){
 			return obj.get(0).clientHeight;
 		});
 		$.customEventTrigger("#textarea").add('resize',
