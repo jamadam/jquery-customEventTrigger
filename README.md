@@ -1,28 +1,28 @@
-conditionalTrigger 0.01 - Trigger events conditionally
+customEventTrigger 0.01 - Trigger events conditionally
 ---------------
 
 ## SYNOPSIS
     
-    $.conditionalTrigger('#target').addGetTrueTrigger(yourEventName, condition, interval)
-    $.conditionalTrigger('#target').addChangeTrigger(yourEventName, condition, interval)
-    $.conditionalTrigger('#target').add(yourEventName, genCb, compareCb, interval)
-    $.conditionalTrigger('#target').remove(yourEventName)
+    $.customEventTrigger('#target').addGetTrueTrigger(yourEventName, condition, interval)
+    $.customEventTrigger('#target').addChangeTrigger(yourEventName, condition, interval)
+    $.customEventTrigger('#target').add(yourEventName, genCb, compareCb, interval)
+    $.customEventTrigger('#target').remove(yourEventName)
 
 ### EXAMPLE1
 
-    $.conditionalTrigger('.tab-content').addGetTrueTrigger('shown', function(obj) {
+    $.customEventTrigger('.tab-content').addGetTrueTrigger('shown', function(obj) {
         return (obj.css('display') != 'none');
     });
 
 ### EXAMPLE2
 
-    $.conditionalTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+    $.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
         return obj.get(0).clientWidth;
     });
 
 ### EXAMPLE3
 
-    $.conditionalTrigger("#textarea").add('resize',
+    $.customEventTrigger("#textarea").add('resize',
         function(obj){
             return [obj.get(0).clientWidth, obj.get(0).clientHeight];
         },

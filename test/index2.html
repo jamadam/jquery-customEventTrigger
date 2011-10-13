@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>jquery.conditionalTrigger Test Suite</title>
+	<title>jquery.customEventTrigger Test Suite</title>
 	<link rel="Stylesheet" media="screen" href="qunit/qunit/qunit.css" />
 	<script src="data/testinit.js"></script>
 	<script src="./jquery.1.6.4.js"></script>
-	<script src="../jquery.conditionalTrigger.js"></script>
+	<script src="../jquery.customEventTrigger.js"></script>
 	<script type="text/javascript">
 	$(function() {
-		$.conditionalTrigger("#hoge").addGetTrueTrigger('myClick', function(obj) {
+		$.customEventTrigger("#hoge").addGetTrueTrigger('myClick', function(obj) {
 			return (obj.filter('*:active').length > 0);
 		});
 		$('#hoge').bind('myClick', function(){
@@ -21,7 +21,7 @@
 			additionalDiv.fadeIn();
 			return false;
 		});
-		$.conditionalTrigger("#additionalContainer").addGetTrueTrigger('gotElement', function(obj) {
+		$.customEventTrigger("#additionalContainer").addGetTrueTrigger('gotElement', function(obj) {
 			var a = obj.find('*');
 			if (a.length > 0) {
 				return (a.css('opacity') == 1);
@@ -30,20 +30,62 @@
 		$("#additionalContainer").bind('gotElement', function() {
 			console.log('gotElement');
 		});
-		$.conditionalTrigger(document).addGetTrueTrigger('additionalContainerLoaded', function(obj) {
+		$.customEventTrigger(document).addGetTrueTrigger('additionalContainerLoaded', function(obj) {
 			return $('#additionalContainer').length > 0;
 		});
 		$(document).bind('additionalContainerLoaded', function() {
 			console.log('additionalContainerLoaded');
 		});
 		
-		$.conditionalTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.conditionalTrigger("#textarea").addChangeTrigger('resizeY', function(obj){
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeX', function(obj){
+			return obj.get(0).clientWidth;
+		});
+		$.customEventTrigger("#textarea").addChangeTrigger('resizeY', function(obj){
 			return obj.get(0).clientHeight;
 		});
-		$.conditionalTrigger("#textarea").add('resize',
+		$.customEventTrigger("#textarea").add('resize',
 			function(obj){
 				return [obj.get(0).clientWidth, obj.get(0).clientHeight];
 			},
@@ -69,7 +111,7 @@
 	</script>
 </head>
 <body id="body">
-	<h1 id="qunit-header">jquery.conditionalTrigger Test Suite</h1>
+	<h1 id="qunit-header">jquery.customEventTrigger Test Suite</h1>
 	<h2 id="qunit-banner"></h2>
 	<div id="qunit-testrunner-toolbar"></div>
 	<h2 id="qunit-userAgent"></h2>
