@@ -48,15 +48,13 @@
         $(this).each(function() {
             var obj = $(this);
             var a;
-            var cb = function() {
+            var tid = setInterval(function() {
                 var b = newValue(obj);
                 if (compare(a, b)) {
                     obj.trigger(eventName);
                 }
                 a = b;
-            };
-            cb();
-            var tid = setInterval(cb, interval || 1);
+            }, interval || 1);
             obj.data(generateTidDataName(eventName), tid);
         });
     };
