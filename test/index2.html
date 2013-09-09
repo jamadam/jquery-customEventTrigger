@@ -5,45 +5,43 @@
 	<title>jquery.customEventTrigger Test Suite</title>
 	<link rel="Stylesheet" media="screen" href="qunit/qunit/qunit.css" />
 	<script src="data/testinit.js"></script>
-	<script src="./jquery.1.6.4.js"></script>
+	<script src="./jquery.1.9.1.js"></script>
 	<script src="../jquery.customEventTrigger.js"></script>
 	<script type="text/javascript">
 	$(function() {
-		$.customEventTrigger("#hoge").addGettingTrueEvent('myClick', function(obj) {
-			return (obj.filter('*:active').length > 0);
-		});
-		$('#hoge').bind('myClick', function(){
-			console.log('myClick fired');
-		});
 		$("#addDom").bind('click', function() {
 			var additionalDiv = $('<div class="additionalDiv">additionalDiv</div>').css({display:'none'});
 			$('#additionalContainer').append(additionalDiv);
 			additionalDiv.fadeIn();
 			return false;
 		});
-		$.customEventTrigger("#additionalContainer").addGettingTrueEvent('gotElement', function(obj) {
+		var instance2 = $('#additionalContainer').customEventTrigger();
+		instance2.addGettingTrueEvent('gotElement', function(obj) {
 			var a = obj.find('*');
 			if (a.length > 0) {
 				return (a.css('opacity') == 1);
 			}
+			return false;
 		});
 		$("#additionalContainer").bind('gotElement', function() {
 			console.log('gotElement');
 		});
-		$.customEventTrigger(document).addGettingTrueEvent('additionalContainerLoaded', function(obj) {
+		var instance3 = $(document).customEventTrigger();
+		instance3.addGettingTrueEvent('additionalContainerLoaded', function(obj) {
 			return $('#additionalContainer').length > 0;
 		});
 		$(document).bind('additionalContainerLoaded', function() {
 			console.log('additionalContainerLoaded');
 		});
 		
-		$.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
+		var instance4 = $("#textarea").customEventTrigger();
+		instance4.addChangeEvent('resizeX', function(obj){
 			return obj.get(0).clientWidth;
 		});
-		$.customEventTrigger("#textarea").addChangeEvent('resizeY', function(obj){
+		instance4.addChangeEvent('resizeY', function(obj){
 			return obj.get(0).clientHeight;
 		});
-		$.customEventTrigger("#textarea").add('resize',
+		instance4.add('resize',
 			function(obj){
 				return [obj.get(0).clientWidth, obj.get(0).clientHeight];
 			},
@@ -51,6 +49,7 @@
 				if (a !== undefined) {
 					return a[0] !== b[0] || a[1] !== b[1];
 				}
+				return false;
 			}
 		);
 		$("#hoge").bind('click', function(){

@@ -25,7 +25,8 @@ $(function(){
 	
 	asyncTest('first trigger', 1, function(){
 		
-		$.customEventTrigger(target).addGettingTrueEvent('myEvent', function(obj){
+		var instance = $(target).customEventTrigger();
+		instance.addGettingTrueEvent('myEvent', function(obj){
 			return obj.hasClass('someclass');
 		});
 		
@@ -73,7 +74,8 @@ $(function(){
 	
 	asyncTest('myEvent triggered removed', 1, function(){
 		
-		$.customEventTrigger(target).remove('myEvent');
+		var instance = $(target).customEventTrigger();
+		instance.remove('myEvent');
 		target.removeClass('triggered');
 		target.removeClass('someclass');
 		target.addClass('someclass');
