@@ -3,26 +3,30 @@ customEventTrigger 0.01 - Trigger events conditionally
 
 ## SYNOPSIS
     
-    $.customEventTrigger('#target').addGettingTrueEvent(yourEventName, condition, interval)
-    $.customEventTrigger('#target').addChangeEvent(yourEventName, condition, interval)
-    $.customEventTrigger('#target').add(yourEventName, genCb, compareCb, interval)
-    $.customEventTrigger('#target').remove(yourEventName)
+    var instance = $('#target').customEventTrigger();
+    instance.addGettingTrueEvent(yourEventName, condition, interval)
+    instance.addChangeEvent(yourEventName, condition, interval)
+    instance.add(yourEventName, genCb, compareCb, interval)
+    instance.remove(yourEventName)
 
 ### EXAMPLE1
 
-    $.customEventTrigger('.tab-content').addGettingTrueEvent('shown', function(obj) {
+    var instance = $('.tab-content').customEventTrigger();
+    instance.addGettingTrueEvent('shown', function(obj) {
         return (obj.css('display') != 'none');
     });
 
 ### EXAMPLE2
 
-    $.customEventTrigger("#textarea").addChangeEvent('resizeX', function(obj){
+    var instance = $('#textarea').customEventTrigger();
+    instance.addChangeEvent('resizeX', function(obj){
         return obj.get(0).clientWidth;
     });
 
 ### EXAMPLE3
 
-    $.customEventTrigger("#textarea").add('resize',
+    var instance = $('#textarea').customEventTrigger();
+    instance.add('resize',
         function(obj){
             return [obj.get(0).clientWidth, obj.get(0).clientHeight];
         },
