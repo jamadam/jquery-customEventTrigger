@@ -86,14 +86,14 @@
     }
 
     /**
-     * デフォルトパラメータ
+     * default parameters
      */
     var default_params = {
 
     };
 
     /**
-     * 全プラグイン共通
+     * Common constructer
      */
     $.fn[plugname] = function(params){
         return new Class(this, $.extend(default_params, params, {}));

@@ -1,4 +1,4 @@
-customEventTrigger 0.01 - Trigger events conditionally
+customEventTrigger 0.02 - Trigger events conditionally
 ---------------
 
 ## SYNOPSIS
@@ -40,7 +40,7 @@ customEventTrigger 0.01 - Trigger events conditionally
 [https://github.com/jamadam/jquery-customEventTrigger]
 [https://github.com/jamadam/jquery-customEventTrigger]:https://github.com/jamadam/jquery-customEventTrigger
 
-Copyright (c) 2011 [jamadam]
+Copyright(c) [jamadam]
 [jamadam]: http://blog2.jamadam.com/
 
 Dual licensed under the MIT and GPL licenses:
